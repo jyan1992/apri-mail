@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex,nofollow">
+<title>Apri in Mail</title>
+<style>
+body{font-family:-apple-system,system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f5f5f7}
+a{display:inline-block;padding:16px 28px;background:#0a84ff;color:#fff;border-radius:14px;text-decoration:none;font-size:20px;font-weight:600}
+p{color:#666;text-align:center}
+</style>
+</head>
+<body>
+<div>
+<p><a id="apri" href="message://">Apri in Mail</a></p>
+<p id="nota"></p>
+</div>
+<script>
+(function(){
+  var id = location.hash.slice(1);
+  var a = document.getElementById('apri');
+  if (!id) { document.getElementById('nota').textContent = 'Nessuna mail indicata.'; return; }
+  try { id = decodeURIComponent(id); } catch(e) {}
+  if (id.charAt(0) !== '<') id = '<' + id + '>';
+  var url = 'message:' + encodeURIComponent(id);
+  a.href = url;
+  location.href = url;
+})();
+</script>
+</body>
+</html>
